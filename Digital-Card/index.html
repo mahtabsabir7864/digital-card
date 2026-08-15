@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Mahtab Sabir | Digital Card</title>
+    <meta name="description" content="Digital card of Muhammad Mahtab Sabir">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #eef2f7;
+            --card: rgba(255, 255, 255, 0.92);
+            --text: #172033;
+            --muted: #667085;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --border: #e5e7eb;
+            --success: #16a34a;
+            --shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+        }
+
+        body.dark {
+            --bg: #0f172a;
+            --card: rgba(30, 41, 59, 0.96);
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --primary: #60a5fa;
+            --primary-dark: #3b82f6;
+            --border: #334155;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        body {
+            min-height: 100vh;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(circle at top left,
+                    rgba(37, 99, 235, 0.18),
+                    transparent 35%),
+                radial-gradient(circle at bottom right,
+                    rgba(14, 165, 233, 0.16),
+                    transparent 35%),
+                var(--bg);
+
+            color: var(--text);
+            transition: 0.3s ease;
+        }
+
+        .container {
+            width: min(100% - 30px, 480px);
+            margin: 30px auto;
+        }
+
+        /* TOP BUTTONS */
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.25s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        /* CARD */
+
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        /* PROFILE */
+
+        .profile {
+            text-align: center;
+            padding: 35px 25px 25px;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .profile-image {
+            width: 125px;
+            height: 125px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
+
+        .verified {
+            position: absolute;
+            bottom: 8px;
+            right: 5px;
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            font-size: 14px;
+        }
+
+        .name {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .profession {
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .location {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .bio {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 15px auto 0;
+            max-width: 390px;
+        }
+
+        /* QUICK ACTIONS */
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 0 20px 25px;
+        }
+
+        .action {
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 13px 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        .action span {
+            display: block;
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .action:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* SECTIONS */
+
+        .section {
+            padding: 0 20px 22px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 9px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(37, 99, 235, 0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .info-content {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .info-label {
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* COPY BUTTON */
+
+        .copy-btn {
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 9px;
+            padding: 7px 10px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* SOCIAL */
+
+        .socials {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .social {
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 13px 5px;
+            text-align: center;
+            transition: 0.25s;
+        }
+
+        .social:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .social-icon {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .social-name {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* BANK */
+
+        .bank-card {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 10px;
+        }
+
+        .bank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .bank-name {
+            font-weight: 800;
+        }
+
+        .bank-type {
+            font-size: 10px;
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+            padding: 5px 8px;
+            border-radius: 20px;
+        }
+
+        .bank-row {
+            margin-top: 9px;
+        }
+
+        .bank-label {
+            color: var(--muted);
+            font-size: 11px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .bank-value {
+            font-size: 13px;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .bank-copy {
+            margin-top: 12px;
+            width: 100%;
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* QR */
+
+        .qr-section {
+            text-align: center;
+            padding: 5px 20px 25px;
+        }
+
+        .qr-box {
+            display: inline-block;
+            padding: 12px;
+            background: white;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+
+        #qrcode img {
+            display: block;
+        }
+
+        .qr-text {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* BOTTOM BUTTONS */
+
+        .bottom-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 20px 25px;
+        }
+
+        .main-btn {
+            border: none;
+            border-radius: 13px;
+            padding: 13px;
+            cursor: pointer;
+            font-weight: 700;
+            background: var(--primary);
+            color: white;
+            transition: 0.25s;
+        }
+
+        .main-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(37, 99, 235, 0.08);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 11px;
+            padding: 0 20px 25px;
+        }
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 25px;
+            transform: translate(-50%, 100px);
+            background: #111827;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        @media (max-width: 380px) {
+            .container {
+                width: min(100% - 18px, 480px);
+            }
+
+            .name {
+                font-size: 24px;
+            }
+
+            .socials {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <button class="icon-btn"
+                    onclick="toggleDarkMode()"
+                    title="Dark / Light Mode">
+                🌙
+            </button>
+            <button class="icon-btn"
+                    onclick="shareCard()"
+                    title="Share">
+                ↗
+            </button>
+        </div>
+        <!-- DIGITAL CARD -->
+        <div class="card">
+            <!-- PROFILE -->
+            <div class="profile">
+                <div class="profile-image-wrapper">
+                    <!-- CHANGE THIS IMAGE -->
+                    <img
+                        src="assets/profile.jpg"
+                        alt="Muhammad Mahtab Sabir"
+                        class="profile-image"
+                    >
+                    <div class="verified">
+                        ✓
+                    </div>
+                </div>
+                <h1 class="name">
+                    Muhammad Mahtab Sabir.
+                </h1>
+                <div class="profession">
+                    Student.
+                </div>
+                <div class="location">
+                    📍 Al-Badar Road Malir Halt, Karachi, Sindh, Pakistan
+                </div>
+                <p class="bio">
+                    Welcome to my digital card. Here you can find
+                    my contact information, professional details,
+                    social links and payment information.
+                </p>
+            </div>
+            <!-- QUICK ACTIONS -->
+            <div class="actions">
+                <a class="action" href="tel:+923463502286">
+                    <span>📞</span>
+                    Call Me
+                </a>
+                <a class="action" href="https://wa.me/923463502286" target="_blank">
+                    <span>💬</span>
+                    WhatsApp
+                </a>
+                <a class="action" href="mailto:sabirmahtab1@gmail.com">
+                    <span>✉️</span>
+                    Email
+                </a>
+                <a class="action"
+                   href="https://maps.app.goo.gl/4qa94J41QLaXwfZX6"
+                   target="_blank">
+                    <span>📍</span>
+                    Location
+                </a>
+            </div>
+            <!-- CONTACT -->
+            <div class="section">
+                <div class="section-title">
+                    Contact Information
+                </div>
+                <div class="info-box">
+                    <div class="info-icon">
+                        📱
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">
+                            Phone
+                        </div>
+                        <div class="info-value">
+                            0346 3502286
+                        </div>
+                    </div>
+                    <button class="copy-btn"
+                            onclick="copyText('03463502286')">
+                        Copy
+                    </button>
+                </div>
+                <div class="info-box">
+                    <div class="info-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                            <path fill="#fff" d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z"></path><path fill="#fff" d="M4.868,43.803c-0.132,0-0.26-0.052-0.355-0.148c-0.125-0.127-0.174-0.312-0.127-0.483l2.639-9.636c-1.636-2.906-2.499-6.206-2.497-9.556C4.532,13.238,13.273,4.5,24.014,4.5c5.21,0.002,10.105,2.031,13.784,5.713c3.679,3.683,5.704,8.577,5.702,13.781c-0.004,10.741-8.746,19.48-19.486,19.48c-3.189-0.001-6.344-0.788-9.144-2.277l-9.875,2.589C4.953,43.798,4.911,43.803,4.868,43.803z"></path><path fill="#cfd8dc" d="M24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,4C24.014,4,24.014,4,24.014,4C12.998,4,4.032,12.962,4.027,23.979c-0.001,3.367,0.849,6.685,2.461,9.622l-2.585,9.439c-0.094,0.345,0.002,0.713,0.254,0.967c0.19,0.192,0.447,0.297,0.711,0.297c0.085,0,0.17-0.011,0.254-0.033l9.687-2.54c2.828,1.468,5.998,2.243,9.197,2.244c11.024,0,19.99-8.963,19.995-19.98c0.002-5.339-2.075-10.359-5.848-14.135C34.378,6.083,29.357,4.002,24.014,4L24.014,4z"></path><path fill="#40c351" d="M35.176,12.832c-2.98-2.982-6.941-4.625-11.157-4.626c-8.704,0-15.783,7.076-15.787,15.774c-0.001,2.981,0.833,5.883,2.413,8.396l0.376,0.597l-1.595,5.821l5.973-1.566l0.577,0.342c2.422,1.438,5.2,2.198,8.032,2.199h0.006c8.698,0,15.777-7.077,15.78-15.776C39.795,19.778,38.156,15.814,35.176,12.832z"></path><path fill="#fff" fill-rule="evenodd" d="M19.268,16.045c-0.355-0.79-0.729-0.806-1.068-0.82c-0.277-0.012-0.593-0.011-0.909-0.011c-0.316,0-0.83,0.119-1.265,0.594c-0.435,0.475-1.661,1.622-1.661,3.956c0,2.334,1.7,4.59,1.937,4.906c0.237,0.316,3.282,5.259,8.104,7.161c4.007,1.58,4.823,1.266,5.693,1.187c0.87-0.079,2.807-1.147,3.202-2.255c0.395-1.108,0.395-2.057,0.277-2.255c-0.119-0.198-0.435-0.316-0.909-0.554s-2.807-1.385-3.242-1.543c-0.435-0.158-0.751-0.237-1.068,0.238c-0.316,0.474-1.225,1.543-1.502,1.859c-0.277,0.317-0.554,0.357-1.028,0.119c-0.474-0.238-2.002-0.738-3.815-2.354c-1.41-1.257-2.362-2.81-2.639-3.285c-0.277-0.474-0.03-0.731,0.208-0.968c0.213-0.213,0.474-0.554,0.712-0.831c0.237-0.277,0.316-0.475,0.474-0.791c0.158-0.317,0.079-0.594-0.04-0.831C20.612,19.329,19.69,16.983,19.268,16.045z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">
+                            WhatsApp
+                        </div>
+                        <div class="info-value">
+                            +92 346 3502286
+                        </div>
+                    </div>
+                    <button class="copy-btn"
+                            onclick="copyText('+923463502286')">
+                        Copy
+                    </button>
+                </div>
+                <div class="info-box">
+                    <div class="info-icon">
+                        ✉️
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">
+                            Email
+                        </div>
+                        <div class="info-value">
+                            sabirmahtab1@gmail.com
+                        </div>
+                    </div>
+                    <button class="copy-btn"
+                            onclick="copyText('sabirmahtab1@gmail.com')">
+                        Copy
+                    </button>
+                </div>
+                <div class="info-box">
+                    <div class="info-icon">
+                        📍
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">
+                            Address
+                        </div>
+                        <div class="info-value">
+                            Al-Badar Road Malir Halt, Karachi, Sindh, Pakistan
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PROFESSIONAL -->
+            <div class="section">
+                <div class="section-title">
+                    Professional Information
+                </div>
+                <div class="info-box">
+                    <div class="info-icon">
+                        🎓
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">
+                            Education
+                        </div>
+                        <div class="info-value">
+                            Intermediate with FSc Pre-Engineering
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="info-box">
+                    <div class="info-icon">
+                        ⚖️
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">
+                            Career Goal
+                        </div>
+                        <div class="info-value">
+                            Advocate / Legal Profession
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- SOCIAL MEDIA -->
+            <div class="section">
+                <div class="section-title">
+                    Social Media
+                </div>
+                <div class="socials">
+                    <a class="social"
+                       href="https://www.instagram.com/sabirmahtab7864?igsh=MTlrNzg2Z244eXU4NA==&igsi=MTlrNzg2Z244eXU4NA=="
+                       target="_blank">
+                        <span class="social-icon">
+                            ◎
+                        </span>
+                        <span class="social-name">
+                            Instagram
+                        </span>
+                    </a>
+                    <a class="social"
+                       href="https://www.tiktok.com/@mahtabsabir7864?_r=1&_t=ZS-98skJPy1pBp"
+                       target="_blank">
+                        <span class="social-icon">
+                            ♪
+                        </span>
+                        <span class="social-name">
+                            TikTok
+                        </span>
+                    </a>
+                    <a class="social"
+                       href="https://www.facebook.com/mahtabsabir7864"
+                       target="_blank">
+                        <span class="social-icon">
+                            f
+                        </span>
+                        <span class="social-name">
+                            Facebook
+                        </span>
+                    </a>
+                    <a class="social"
+                       href="https://www.linkedin.com/in/muhammad-mahtab-s-619342253/"
+                       target="_blank">
+                        <span class="social-icon">
+                            in
+                        </span>
+                        <span class="social-name">
+                            LinkedIn
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- BANKING -->
+            <div class="section">
+                <div class="section-title">
+                    Payment Information
+                </div>
+                <div class="bank-card">
+                    <div class="bank-header">
+                        <div class="bank-name">
+                            Mashreq Bank Pakistan Limited
+                        </div>
+                        <div class="bank-type">
+                            BANK ACCOUNT
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Account Title
+                        </span>
+                        <div class="bank-value">
+                            MUHAMMAD MAHTAB SABIR
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Account Number
+                        </span>
+                        <div class="bank-value">
+                            089120088467
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            IBAN
+                        </span>
+                        <div class="bank-value">
+                            PK20 MSHQ 0000 0891 2008 8467
+                        </div>
+                    </div>
+                    <button
+                        class="bank-copy"
+                        onclick="copyText('PK20MSHQ0000089120088467')">
+                        📋 Copy IBAN
+                    </button>
+                </div>
+                <div class="bank-card">
+                    <div class="bank-header">
+                        <div class="bank-name">
+                            JS BANK ZINDIGI ACCOUNT
+                        </div>
+                        <div class="bank-type">
+                            BANK ACCOUNT
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Account Title
+                        </span>
+                        <div class="bank-value">
+                            MUHAMMAD MAHTAB SABIR
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Account Number
+                        </span>
+                        <div class="bank-value">
+                            03463502286
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            IBAN
+                        </span>
+                        <div class="bank-value">
+                            PK49 JSBL 9999 9034 6350 2286
+                        </div>
+                    </div>
+                    <button
+                        class="bank-copy"
+                        onclick="copyText('PK49JSBL9999903463502286')">
+                        📋 Copy IBAN
+                    </button>
+                </div>
+                <!-- EASYPAISA -->
+                <div class="bank-card">
+                    <div class="bank-header">
+                        <div class="bank-name">
+                            Easypaisa
+                        </div>
+                        <div class="bank-type">
+                            ASAAN DIGITAL ACCOUNT
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Account Title
+                        </span>
+                        <div class="bank-value">
+                            MUHAMMAD MEHTAB SABIR
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Mobile Number
+                        </span>
+                        <div class="bank-value">
+                            03002624021
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            IBAN
+                        </span>
+                        <div class="bank-value">
+                            PK20 TMFB 0000 0000 9818 5220
+                        </div>
+                    </div>
+                    <button
+                        class="bank-copy"
+                        onclick="copyText('PK20TMFB0000000098185220')">
+                        📋 Copy IBAN
+                    </button>
+                </div>
+                <!-- JAZZCASH -->
+                <div class="bank-card">
+                    <div class="bank-header">
+                        <div class="bank-name">
+                            JazzCash
+                        </div>
+                        <div class="bank-type">
+                            ASAAN DIGITAL ACCOUNT
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Account Title
+                        </span>
+                        <div class="bank-value">
+                            MUHAMMAD MAHTAB SABIR
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            Mobile Number
+                        </span>
+                        <div class="bank-value">
+                            03002624021
+                        </div>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">
+                            IBAN
+                        </span>
+                        <div class="bank-value">
+                            PK28 JCMA 0505 9230 0262 4021
+                        </div>
+                    </div>
+                    <button
+                        class="bank-copy"
+                        onclick="copyText('PK28JCMA0505923002624021')">
+                        📋 Copy IBAN
+                    </button>
+                </div>
+            </div>
+
+            <!-- QR CODE -->
+            <div class="qr-section">
+                <div class="section-title">
+                    Scan My Digital Card
+                </div>
+                <div class="qr-box">
+                    <div id="qrcode"></div>
+                </div>
+                <div class="qr-text">
+                    Scan this QR code to open my digital card.
+                </div>
+            </div>
+            <!-- BUTTONS -->
+            <div class="bottom-actions">
+                <button
+                    class="main-btn"
+                    onclick="saveContact()">
+                    👤 Save Contact
+                </button>
+                <button
+                    class="main-btn secondary-btn"
+                    onclick="shareCard()">
+                    ↗ Share Card
+                </button>
+            </div>
+            <div class="footer">
+                © 2026 Muhammad Mahtab Sabir
+                <br>
+                Digital Contact Card
+            </div>
+        </div>
+    </div>
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        Copied successfully!
+    </div>
+
+    <!-- QR CODE LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        /* ==============================
+           COPY TEXT
+        ============================== */
+        function copyText(text) {
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showToast("Copied successfully!");
+                })
+                .catch(() => {
+                    showToast("Unable to copy.");
+                });
+        }
+        /* ==============================
+           TOAST
+        ============================== */
+        function showToast(message) {
+            const toast =
+                document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2200);
+        }
+        /* ==============================
+           DARK MODE
+        ============================== */
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
+            const dark =
+                document.body.classList.contains("dark");
+            localStorage.setItem(
+                "darkMode",
+                dark ? "true" : "false"
+            );
+        }
+        /* ==============================
+           LOAD DARK MODE
+        ============================== */
+        if (
+            localStorage.getItem("darkMode") === "true"
+        )
+        {
+            document.body.classList.add("dark");
+        }
+        /* ==============================
+           SHARE
+        ============================== */
+        async function shareCard() {
+            const shareData = {
+                title:
+                    "Muhammad Mahtab Sabir - Digital Card",
+                text:
+                    "Contact Muhammad Mahtab Sabir",
+                url:
+                    window.location.href
+            };
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (error) {
+                    console.log("Share cancelled.");
+                }
+            } else {
+                copyText("https://github.com/mahtabsabir7864/digital-card.git");
+                showToast(
+                    "Card link copied!"
+                );
+            }
+        }
+        /* ==============================
+           SAVE CONTACT
+        ============================== */
+        function saveContact() {
+            const vCard = `BEGIN:VCARD
+            VERSION:3.0
+            FN:Muhammad Mahtab Sabir
+            N:Sabir;Muhammad Mahtab;;;
+            ORG:Personal
+            TITLE:Student / Future Advocate
+            TEL;TYPE=CELL:03463502286
+            TEL;TYPE=WHATSAPP:+923463502286
+            EMAIL:sabirmahtab1@gmail.com
+            ADR;TYPE=HOME:;;Karachi;Sindh;;Pakistan
+            URL:https://github.com/mahtabsabir7864/digital-card.git
+            END:VCARD`;
+            const blob = new Blob(
+                [vCard],
+                {
+                    type: "text/vcard"
+                }
+            );
+            const url =
+                URL.createObjectURL(blob);
+            const link =
+                document.createElement("a");
+            link.href = url;
+            link.download =
+                "Muhammad-Mahtab-Sabir.vcf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            showToast(
+                "Contact file created!"
+            );
+        }
+        /* ==============================
+           QR CODE
+        ============================== */
+        new QRCode(
+            document.getElementById("qrcode"),
+            {
+                text: "https://github.com/mahtabsabir7864/digital-card.git",
+                width: 160,
+                height: 160,
+                correctLevel:
+                    QRCode.CorrectLevel.H
+            }
+        );
+    </script>
+
+</body>
+</html>
